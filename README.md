@@ -2,6 +2,33 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
+## installation
+
+`npm install @hisptz/ngx-dhis2-menu`
+
+## Usage
+
+If the module is to be imported in the app.module, then import as 
+
+`import { NgxDhis2MenuModule } from '@hisptz/ngx-dhis2-menu';`
+
+then add this in the imports
+```
+imports: [
+    ...
+    NgxDhis2MenuModule.forRoot(),
+    ...
+    ]
+```
+
+Once imported, menu can be called in as 
+
+```
+<ngx-dhis2-menu
+  
+></ngx-dhis2-menu>
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
