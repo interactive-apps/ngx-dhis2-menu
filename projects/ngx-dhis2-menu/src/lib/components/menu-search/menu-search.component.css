@@ -113,7 +113,7 @@
   display: flex;
   overflow: auto;
   flex-wrap: wrap;
-  height: 350px;
+  height: 380px;
   font-size: 26px;
   color: #cccccc;
 }
@@ -185,15 +185,15 @@
 }
 
 .menu-inner-list-block::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
 }
 
 .menu-inner-list-block::-webkit-scrollbar-track {
-  background-color: #eeeeee;
+  background-color: rgba(0, 0, 0, .02);
 }
 
 .menu-inner-list-block::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, .1);
 }
 
 .menu-app-management-block {

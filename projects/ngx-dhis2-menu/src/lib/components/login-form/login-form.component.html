@@ -1,4 +1,4 @@
-<form action="" id="login-form" #loginForm="ngForm">
+<form action="" class="login-form" #loginForm="ngForm">
   <input type="text" required [(ngModel)]="credentials.username" name="username" #username="ngModel"
          placeholder="Enter username" autofocus tabindex="0">
   <input type="password" required [(ngModel)]="credentials.password" name="password" #password="ngModel"
@@ -7,4 +7,4 @@
     {{loggingIn ? 'Logging in ...' : 'Login'}}
   </button>
 </form>
-<div id="login-error-block">{{loginError}}</div>
+<div *ngIf="loginError !== ''" class="login-error-block">{{loginError}}</div>
