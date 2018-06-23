@@ -1,5 +1,7 @@
 # DHIS2 Menu
 
+Menu module for dhis2 applications based on angular 6
+
 ## installation
 
 `npm install @hisptz/ngx-dhis2-menu`
