@@ -50,7 +50,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-dhis2-menu-module:build"
+            "browserTarget": "ngx-dhis2-menu-module:build",
+            "proxyConfig": "proxy-config.json"
           },
           "configurations": {
             "production": {
@@ -110,6 +111,46 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-dhis2-menu": {
+      "root": "projects/ngx-dhis2-menu",
+      "sourceRoot": "projects/ngx-dhis2-menu/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-dhis2-menu/tsconfig.lib.json",
+            "project": "projects/ngx-dhis2-menu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-dhis2-menu/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-dhis2-menu/src/test.ts",
+            "tsConfig": "projects/ngx-dhis2-menu/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-dhis2-menu/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-dhis2-menu/tsconfig.lib.json",
+              "projects/ngx-dhis2-menu/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
