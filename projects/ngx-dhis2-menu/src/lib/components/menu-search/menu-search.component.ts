@@ -6,7 +6,7 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import * as fromServices from '../../services';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-menu-search',
@@ -43,7 +43,7 @@ export class MenuSearchComponent implements OnInit {
   originalApps: any[];
   loadingModules: boolean;
   filteredApp: string;
-  constructor(private menuService: fromServices.MenuService) {
+  constructor(private menuService: MenuService) {
     this.rootUrl = '../../../';
     this.searchWidth = 47;
     this.showApps = false;

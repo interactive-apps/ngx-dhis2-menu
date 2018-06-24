@@ -7,7 +7,9 @@
 .menu-search-input-block {
   width: 390px;
 }
-.menu-search-input {
+#menu_search_input {
+  padding: 0 !important;
+  margin: 0 !important;
   background-color: transparent;
   color: #fff !important;
   float: right;
@@ -25,31 +27,31 @@
   width: 100%;
 }
 
-.menu-search-input::-webkit-input-placeholder {
+#menu_search_input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: rgba(255, 255, 255, 0.7);
 }
 
-.menu-search-input::-moz-placeholder {
+#menu_search_input::-moz-placeholder {
   /* Firefox 19+ */
   color: rgba(255, 255, 255, 0.7);
 }
 
-.menu-search-input:-ms-input-placeholder {
+#menu_search_input:-ms-input-placeholder {
   /* IE 10+ */
   color: rgba(255, 255, 255, 0.7);
 }
 
-.menu-search-input:-moz-placeholder {
+#menu_search_input:-moz-placeholder {
   /* Firefox 18- */
   color: rgba(255, 255, 255, 0.7);
 }
 
-.menu-search-input:focus {
+#menu_search_input:focus {
   outline: none;
 }
 
-.menu-search-input:focus+.underline {
+#menu_search_input:focus+.underline {
   transform: scale(1);
 }
 
@@ -58,7 +60,7 @@
   position: absolute;
   height: 2px;
   width: 390px;
-  bottom: 7px;
+  bottom: 11px;
   -webkit-transform: scale(0, 1);
   transform: scale(0, 1);
   -webkit-transition: all 0.3s linear;
@@ -85,7 +87,7 @@
   display: block;
   top: 49px;
   width: 590px;
-  height: 430px;
+  min-height: 430px;
   right: 10px;
   z-index: -1000;
   font-size: 14px;
@@ -101,8 +103,8 @@
   display: flex;
   overflow: hidden;
   flex-wrap: wrap;
-  height: 360px;
-  padding: 10px;
+  height: 380px;
+  padding: 10px 5px 10px 10px;
 }
 
 .menu-inner-list-block:hover {
@@ -111,7 +113,7 @@
 
 .menu-inner-list-block-no-match {
   display: flex;
-  overflow: auto;
+  overflow: hidden;
   flex-wrap: wrap;
   height: 380px;
   font-size: 26px;

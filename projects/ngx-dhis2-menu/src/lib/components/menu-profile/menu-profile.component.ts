@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as fromServices from '../../services';
-import * as fromConstants from '../../constants';
+import { MenuService } from '../../services/menu.service';
+import { PROFILE_MENUS } from '../../constants/profile-menus';
 
 @Component({
   selector: 'app-menu-profile',
@@ -21,11 +21,11 @@ export class MenuProfileComponent implements OnInit {
   currentUser: any;
   loadingUser: boolean;
   profileMenus: any[];
-  constructor(private menuService: fromServices.MenuService) {
+  constructor(private menuService: MenuService) {
     this.showProfile = false;
     this.rootUrl = this.contextPath = '../../../';
     this.loadingUser = true;
-    this.profileMenus = fromConstants.PROFILE_MENUS;
+    this.profileMenus = PROFILE_MENUS;
   }
 
   ngOnInit() {

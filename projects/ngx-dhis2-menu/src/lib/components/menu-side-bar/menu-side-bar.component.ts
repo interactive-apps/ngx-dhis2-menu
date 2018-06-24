@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-
-import * as fromServices from '../../services';
-import * as fromConstants from '../../constants';
+import { MenuService } from '../../services/menu.service';
+import { PROFILE_MENUS } from '../../constants/profile-menus';
 
 @Component({
   selector: 'app-menu-side-bar',
@@ -20,14 +19,14 @@ export class MenuSideBarComponent implements OnInit {
   filteredApp: string;
   showSidebarApps: boolean;
 
-  constructor(private menuService: fromServices.MenuService) {
+  constructor(private menuService: MenuService) {
     this.showProfile = false;
     this.rootUrl = '../../../';
     this.loadingUser = true;
     this.apps = [];
     this.originalApps = [];
     this.loadingModules = true;
-    this.profileMenus = fromConstants.PROFILE_MENUS;
+    this.profileMenus = PROFILE_MENUS;
     this.filteredApp = '';
     this.showSidebarApps = false;
   }

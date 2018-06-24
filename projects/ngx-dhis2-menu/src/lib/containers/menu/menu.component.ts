@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as fromServices from '../../services';
-import * as fromConstants from '../../constants';
 import {
   trigger,
   state,
@@ -9,6 +7,9 @@ import {
   animate
 } from '@angular/animations';
 import { Observable } from 'rxjs';
+import { MenuService } from '../../services/menu.service';
+import { SystemStateService } from '../../services/system-state.service';
+import { MENU_BACKGROUND_COLORS } from '../../constants/menu-background-colors';
 
 @Component({
   selector: 'ngx-dhis2-menu',
@@ -50,8 +51,8 @@ export class MenuComponent implements OnInit {
   showSidebar: boolean;
   contextPath: string;
 
-  constructor(private menuService: fromServices.MenuService,
-    private systemStatusService: fromServices.SystemStateService) {
+  constructor(private menuService: MenuService,
+    private systemStatusService: SystemStateService) {
     this.rootUrl = '../../../';
     this.menuLoading = true;
     this.menuLoadingFail = false;
@@ -111,7 +112,7 @@ export class MenuComponent implements OnInit {
               ? settings['keyStyle'].split('/')[0]
               : 'blue';
           this.backgroundColor =
-            fromConstants.MENU_BACKGROUND_COLORS[colorName];
+            MENU_BACKGROUND_COLORS[colorName];
 
           this.contextPath = settings.contextPath ? settings.contextPath + '/' : '';
         }

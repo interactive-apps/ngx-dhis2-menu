@@ -13,8 +13,3 @@ export const components: any[] = [
   MenuNotificationComponent
 ];
 
-export * from './menu-search/menu-search.component';
-export * from './menu-profile/menu-profile.component';
-export * from './menu-loader/menu-loader.component';
-export * from './login-form/login-form.component';
-export * from './menu-side-bar/menu-side-bar.component';

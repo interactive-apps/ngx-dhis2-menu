@@ -8,7 +8,6 @@ export class SystemStateService {
   private _loggingStatus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   constructor(private httpClient: HttpClient) {
-    // this._loggingStatus$.next(true);
   }
 
   checkOnlineStatus() {
