@@ -21,12 +21,20 @@ imports: [
     ]
 ```
 
+Note: Menu component make a use of animations from angular, in this case you have to import BrowserAnimationsModule in app.module.ts
+
+```
+imports: [
+ ...
+ BrowserAnimationsModule,
+ ...
+]
+```
+
 Once imported, menu can be called in as 
 
 ```
-<ngx-dhis2-menu
-  
-></ngx-dhis2-menu>
+<ngx-dhis2-menu></ngx-dhis2-menu>
 ```
 
 ## Development server
