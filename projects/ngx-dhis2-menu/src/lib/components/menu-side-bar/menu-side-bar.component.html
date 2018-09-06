@@ -1,4 +1,4 @@
-<div >
+<div class="sidebar-container">
   <div class="sidebar-user-profile-block">
     <div class="sidebar-user-profile-logo" *ngIf="!loadingUser">{{currentUser?.name | abbreviate}}</div>
     <div class="sidebar-user-profile-info">
@@ -10,37 +10,24 @@
     <li>
       <a (click)="toggleSidebarMenus($event)">Apps</a>
     </li>
-    <li
-      [ngClass]="{
+    <li [ngClass]="{
           'sidebar-app-hidden': !showSidebarApps
-        }"
-    >
-      <input
-        type="text"
-        class="sidebar-app-input"
-        placeholder="Search Apps"
-        [(ngModel)]="filteredApp"
-        (ngModelChange)="updateMenuModules()"
-      >
+        }">
+      <input type="text" class="sidebar-app-input" placeholder="Search Apps" [(ngModel)]="filteredApp" (ngModelChange)="updateMenuModules()">
     </li>
-    <li
-      class="sidebar-app-list"
-      [ngClass]="{
+    <li class="sidebar-app-list" [ngClass]="{
           'sidebar-app-hidden': !showSidebarApps
-        }"
-    >
-      <a
-        *ngFor="let app of  apps | filterByName: filteredApp"
-        [href]="app.defaultAction"
-        class="app-menu-btn sidebar-app-menu-btn">
-        <img alt="" [src]="app.icon" title="{{app.displayName}}">
-        <div class="app-menu-name">{{app.displayName}}</div>
+        }">
+      <a *ngFor="let app of  apps | filterByName: filteredApp" [href]="app.defaultAction" class="sidebar-app-menu-btn">
+        <div class="sidebar-app-menu-btn-content">
+          <img alt="" [src]="app.icon" title="{{app.displayName}}">
+          <div class="app-menu-name">{{app.displayName}}</div>
+        </div>
       </a>
     </li>
     <li *ngFor="let profileMenu of profileMenus">
       <a [href]="rootUrl + profileMenu.defaultAction">
-        <img alt="" [src]="profileMenu.icon">
-        {{profileMenu.name}}
+        <img alt="" [src]="profileMenu.icon"> {{profileMenu.name}}
       </a>
     </li>
     <li>
