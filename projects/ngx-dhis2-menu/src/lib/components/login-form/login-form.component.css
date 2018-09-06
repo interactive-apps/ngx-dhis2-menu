@@ -1,22 +1,22 @@
 .login-form {
   display: flex;
-  padding: 3px;
+  padding: 3px !important;
   width: 100%;
 }
 
-.login-form input {
+.login-form-input {
   padding-left: 7px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-right: 3px;
-  height: 33px;
+  height: 37px;
   outline: none;
   border-radius: 2px;
   border: solid thin #ececec;
 }
 
-.login-form button {
+.login-form-button {
   height: 37px;
   background-color: #ffffff;
   border: solid thin #ececec;
