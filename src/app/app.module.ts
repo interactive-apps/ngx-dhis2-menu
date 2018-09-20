@@ -6,15 +6,9 @@ import { AppComponent } from './app.component';
 import { NgxDhis2MenuModule } from 'ngx-dhis2-menu';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    NgxDhis2MenuModule.forRoot()
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, BrowserAnimationsModule, NgxDhis2MenuModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

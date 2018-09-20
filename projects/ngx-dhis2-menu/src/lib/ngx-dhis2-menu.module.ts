@@ -9,19 +9,7 @@ import { pipes } from './pipes/index';
 
 @NgModule({
   imports: [CommonModule, FormsModule, HttpClientModule],
-  declarations: [
-    ...containers,
-    ...components,
-    ...directives,
-    ...pipes
-  ],
-  exports: [...containers],
+  declarations: [...containers, ...components, ...directives, ...pipes],
+  exports: [...containers]
 })
-export class NgxDhis2MenuModule {
-  public static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: NgxDhis2MenuModule,
-      providers: []
-    };
-  }
-}
+export class NgxDhis2MenuModule {}
