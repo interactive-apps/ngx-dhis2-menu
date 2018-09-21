@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
 import { PROFILE_MENUS } from '../../constants/profile-menus';
+import { LOG_OUT } from '../../icons';
 
 @Component({
   selector: 'app-menu-side-bar',
@@ -8,7 +9,8 @@ import { PROFILE_MENUS } from '../../constants/profile-menus';
   styleUrls: ['./menu-side-bar.component.css']
 })
 export class MenuSideBarComponent implements OnInit {
-  @Input() rootUrl: string;
+  @Input()
+  rootUrl: string;
   showProfile: boolean;
   currentUser: any;
   loadingUser: boolean;
@@ -18,6 +20,7 @@ export class MenuSideBarComponent implements OnInit {
   loadingModules: boolean;
   filteredApp: string;
   showSidebarApps: boolean;
+  logOutIcon: string;
 
   constructor(private menuService: MenuService) {
     this.showProfile = false;
@@ -29,6 +32,7 @@ export class MenuSideBarComponent implements OnInit {
     this.profileMenus = PROFILE_MENUS;
     this.filteredApp = '';
     this.showSidebarApps = false;
+    this.logOutIcon = LOG_OUT;
   }
 
   ngOnInit() {
@@ -57,8 +61,8 @@ export class MenuSideBarComponent implements OnInit {
   private _prepareMenuModules() {
     return this.filteredApp === ''
       ? this.originalApps.filter((menu: any) => {
-        return !menu.onlyShowOnSearch;
-      })
+          return !menu.onlyShowOnSearch;
+        })
       : this.originalApps;
   }
 
@@ -70,5 +74,4 @@ export class MenuSideBarComponent implements OnInit {
   updateMenuModules() {
     this.apps = this._prepareMenuModules();
   }
-
 }

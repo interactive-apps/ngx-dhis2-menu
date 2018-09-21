@@ -2,14 +2,13 @@
   <div class="sidebar-user-profile-block">
     <div class="sidebar-user-profile-logo" *ngIf="!loadingUser">{{currentUser?.name | abbreviate}}</div>
     <div class="sidebar-user-profile-info">
-      <h4 *ngIf="!loadingUser">{{currentUser?.name}}</h4>
-      <h6 *ngIf="!loadingUser">{{currentUser?.email}}</h6>
+      <div>
+        <div class="sidebar-user-name" *ngIf="!loadingUser">{{currentUser?.name}}</div>
+        <div class="sidebar-user-email" *ngIf="!loadingUser">{{currentUser?.email}}</div>
+      </div>
     </div>
   </div>
   <ul class="sidebar-list-block">
-    <li>
-      <a (click)="toggleSidebarMenus($event)">Apps</a>
-    </li>
     <li [ngClass]="{
           'sidebar-app-hidden': !showSidebarApps
         }">
@@ -31,7 +30,9 @@
       </a>
     </li>
     <li>
-      <a [href]="rootUrl + 'dhis-web-commons-security/logout.action'">Log Out</a>
+      <a [href]="rootUrl + 'dhis-web-commons-security/logout.action'">
+        <img [src]="logOutIcon"> Log Out
+      </a>
     </li>
   </ul>
 </div>
