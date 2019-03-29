@@ -1,32 +1,39 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { switchMap, tap } from 'rxjs/operators';
-import { BehaviorSubject, of, Observable, timer } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { switchMap, tap } from "rxjs/operators";
+import { BehaviorSubject, of, Observable, timer } from "rxjs";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: "root" })
 export class SystemStateService {
-  private _loggingStatus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  private _loggingStatus$: BehaviorSubject<boolean> = new BehaviorSubject<
+    boolean
+  >(true);
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   checkOnlineStatus() {
-    return timer(1000, 30000).pipe(switchMap(() => of(navigator.onLine)), tap((onlineStatus) => {
-      this._checkLoginStatus(onlineStatus);
-    }));
+    return timer(1000, 30000).pipe(
+      switchMap(() => of(navigator.onLine)),
+      tap(onlineStatus => {
+        this._checkLoginStatus(onlineStatus);
+      })
+    );
   }
 
   private _checkLoginStatus(isOnline: boolean) {
-
     if (isOnline) {
-
-      this.pingServer().subscribe((pingResult: any) => {
-        this._loggingStatus$.next(pingResult.loggedIn);
-      }, (error) => {
-        if (isOnline) {
-          this._loggingStatus$.next(false);
+      this.pingServer().subscribe(
+        (pingResult: any) => {
+          if (pingResult) {
+            this._loggingStatus$.next(pingResult.loggedIn);
+          }
+        },
+        error => {
+          if (isOnline) {
+            this._loggingStatus$.next(false);
+          }
         }
-      });
+      );
     } else {
       this._loggingStatus$.next(true);
     }
@@ -37,6 +44,6 @@ export class SystemStateService {
   }
 
   pingServer(): Observable<any> {
-    return this.httpClient.get('../../../dhis-web-commons-stream/ping.action');
+    return this.httpClient.get("../../../dhis-web-commons-stream/ping.action");
   }
 }
