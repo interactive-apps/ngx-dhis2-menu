@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { NgxDhis2MenuModule } from 'ngx-dhis2-menu';
+import { NgxDhis2MenuModule } from '@hisptz/ngx-dhis2-menu';
 
 @NgModule({
   declarations: [AppComponent],

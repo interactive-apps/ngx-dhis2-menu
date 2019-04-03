@@ -5,38 +5,48 @@ import { BehaviorSubject, of, Observable, timer } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SystemStateService {
-  private _loggingStatus$: BehaviorSubject<boolean> = new BehaviorSubject<
-    boolean
-  >(true);
+  private _loggingStatus$: BehaviorSubject<boolean>;
+  private _timeInterval: number;
+  private _waitingTime: number;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this._loggingStatus$ = new BehaviorSubject<boolean>(true);
+    this._timeInterval = 30000;
+    this._waitingTime = 0;
+  }
 
   checkOnlineStatus() {
-    return timer(1000, 30000).pipe(
+    return timer(this._waitingTime, this._timeInterval).pipe(
       switchMap(() => of(navigator.onLine)),
-      tap(onlineStatus => {
-        this._checkLoginStatus(onlineStatus);
+      tap(isOnline => {
+        if (isOnline) {
+          // Set time interval to larger value if was lowered
+          this._timeInterval = 30000;
+          this._waitingTime = 500;
+          this._checkLoginStatus(isOnline);
+        } else {
+          // Deduce time for the timer
+          this._timeInterval = 500;
+          this._waitingTime = 500;
+        }
       })
     );
   }
 
   private _checkLoginStatus(isOnline: boolean) {
-    if (isOnline) {
-      this.pingServer().subscribe(
-        (pingResult: any) => {
-          if (pingResult) {
-            this._loggingStatus$.next(pingResult.loggedIn);
-          }
-        },
-        error => {
-          if (isOnline) {
-            this._loggingStatus$.next(false);
-          }
+    this.pingServer().subscribe(
+      (pingResult: any) => {
+        if (pingResult) {
+          this._loggingStatus$.next(pingResult.loggedIn);
         }
-      );
-    } else {
-      this._loggingStatus$.next(true);
-    }
+      },
+      error => {
+        console.log(error);
+        if (isOnline) {
+          this._loggingStatus$.next(false);
+        }
+      }
+    );
   }
 
   getLoginStatus() {
