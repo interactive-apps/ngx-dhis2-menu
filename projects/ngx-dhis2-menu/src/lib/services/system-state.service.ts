@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { switchMap, tap } from 'rxjs/operators';
-import { BehaviorSubject, of, Observable, timer } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { switchMap, tap } from "rxjs/operators";
+import { BehaviorSubject, of, Observable, timer } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class SystemStateService {
@@ -41,7 +41,6 @@ export class SystemStateService {
         }
       },
       error => {
-        console.log(error);
         if (isOnline) {
           this._loggingStatus$.next(false);
         }
@@ -54,6 +53,6 @@ export class SystemStateService {
   }
 
   pingServer(): Observable<any> {
-    return this.httpClient.get('../../../dhis-web-commons-stream/ping.action');
+    return this.httpClient.get("../../../dhis-web-commons-stream/ping.action");
   }
 }
