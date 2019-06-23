@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { MenuService } from '../../services/menu.service';
 import { SystemStateService } from '../../services/system-state.service';
 import { MENU_BACKGROUND_COLORS } from '../../constants/menu-background-colors';
+import { SystemInfoService } from '@iapps/ngx-dhis2-http-client';
 
 @Component({
   selector: 'ngx-dhis2-menu',
@@ -51,8 +52,11 @@ export class MenuComponent implements OnInit {
   showSidebar: boolean;
   contextPath: string;
 
-  constructor(private menuService: MenuService,
-    private systemStatusService: SystemStateService) {
+  constructor(
+    private menuService: MenuService,
+    private systemInfoService: SystemInfoService,
+    private systemStatusService: SystemStateService
+  ) {
     this.rootUrl = '../../../';
     this.menuLoading = true;
     this.menuLoadingFail = false;
@@ -65,7 +69,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.systemStatusService.checkOnlineStatus().subscribe((onlineStatus) => {
+    this.systemStatusService.checkOnlineStatus().subscribe(onlineStatus => {
       this.online = onlineStatus;
       if (this.online && this.wasOffline) {
         this.menuNotification = 'You are online';
@@ -85,7 +89,6 @@ export class MenuComponent implements OnInit {
           this.menuLoading = true;
           this.getSystemSettings();
         }
-
       } else if (!this.online) {
         this.menuNotification = 'You are offline';
         this.wasOffline = true;
@@ -100,7 +103,7 @@ export class MenuComponent implements OnInit {
   }
 
   getSystemSettings() {
-    this.menuService.getSystemSettings(this.rootUrl).subscribe(
+    this.systemInfoService.get().subscribe(
       (settings: any) => {
         if (settings) {
           this.applicationTitle = settings['applicationTitle'];
@@ -109,12 +112,13 @@ export class MenuComponent implements OnInit {
           const colorName = settings.hasOwnProperty('currentStyle')
             ? settings['currentStyle'].split('/')[0]
             : settings.hasOwnProperty('keyStyle')
-              ? settings['keyStyle'].split('/')[0]
-              : 'blue';
-          this.backgroundColor =
-            MENU_BACKGROUND_COLORS[colorName];
+            ? settings['keyStyle'].split('/')[0]
+            : 'blue';
+          this.backgroundColor = MENU_BACKGROUND_COLORS[colorName];
 
-          this.contextPath = settings.contextPath ? settings.contextPath + '/' : '';
+          this.contextPath = settings.contextPath
+            ? settings.contextPath + '/'
+            : '';
         }
         this.menuLoading = false;
         this.menuLoadingFail = false;
