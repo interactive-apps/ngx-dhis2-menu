@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import * as fromConstants from '../constants';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class MenuService {
   private _menuModules$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
@@ -18,7 +18,6 @@ export class MenuService {
         .get('dhis-web-commons/menu/getModules.action', { useRootUrl: true })
         .subscribe(
           (menuModuleResult: any) => {
-            console.log(menuModuleResult);
             const sanitizedMenu = this._sanitizeMenuItems(
               menuModuleResult.modules,
               rootUrl
@@ -28,7 +27,6 @@ export class MenuService {
             observer.complete();
           },
           () => {
-            console.log(null);
             observer.next(null);
             observer.complete();
           }
@@ -38,21 +36,6 @@ export class MenuService {
 
   getSanitizedMenus() {
     return this._menuModules$.asObservable();
-  }
-
-  getUserInfo(rootUrl: string): Observable<any> {
-    return Observable.create(observer => {
-      this.httpClient.get('me.json').subscribe(
-        (userInfo: any) => {
-          observer.next(userInfo);
-          observer.complete();
-        },
-        () => {
-          observer.next(null);
-          observer.complete();
-        }
-      );
-    });
   }
 
   private _sanitizeMenuItems(menuItems: any[], rootUrl: string): any {

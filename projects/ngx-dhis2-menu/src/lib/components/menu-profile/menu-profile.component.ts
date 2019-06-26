@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MenuService } from '../../services/menu.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
+import { User } from '@iapps/ngx-dhis2-http-client';
+import { Observable } from 'rxjs';
+
 import { PROFILE_MENUS } from '../../constants/profile-menus';
 
 @Component({
@@ -18,26 +21,17 @@ export class MenuProfileComponent implements OnInit {
   backgroundColor: string;
 
   showProfile: boolean;
-  currentUser: any;
+  currentUser$: Observable<User>;
   loadingUser: boolean;
   profileMenus: any[];
-  constructor(private menuService: MenuService) {
+  constructor(private httpClient: NgxDhis2HttpClientService) {
     this.showProfile = false;
     this.rootUrl = this.contextPath = '../../../';
-    this.loadingUser = true;
     this.profileMenus = PROFILE_MENUS;
   }
 
   ngOnInit() {
-    this.menuService.getUserInfo(this.rootUrl).subscribe((profile: any) => {
-      if (profile) {
-        this.currentUser = {
-          name: profile.displayName,
-          email: profile.email,
-        };
-      }
-      this.loadingUser = false;
-    });
+    this.currentUser$ = this.httpClient.me();
   }
 
   showMenuProfile(e) {

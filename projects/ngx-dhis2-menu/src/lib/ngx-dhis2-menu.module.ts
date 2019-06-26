@@ -14,9 +14,26 @@ import { ClickOutsideDirective } from './directives';
 import { AbbreviatePipe } from './pipes/abbreviate.pipe';
 import { ConvertToLighterColor } from './pipes/convert-to-lighter-color.pipe';
 import { FilterByNamePipe } from './pipes/filter-by-name.pipe';
+import { MenuNotificationService } from './services/menu-notification.service';
+import { MenuService } from './services/menu.service';
+import { SystemStateService } from './services/system-state.service';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NgxDhis2HttpClientModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgxDhis2HttpClientModule.forRoot({
+      namespace: 'hisptz',
+      version: 1,
+      models: {
+        users: 'id',
+        organisationUnitLevels: 'id',
+        organisationUnits: 'id',
+        organisationUnitGroups: 'id',
+        dataStore_scorecards: 'id'
+      }
+    })
+  ],
   declarations: [
     MenuLoaderComponent,
     MenuProfileComponent,
@@ -30,7 +47,7 @@ import { FilterByNamePipe } from './pipes/filter-by-name.pipe';
     AbbreviatePipe,
     ConvertToLighterColor
   ],
-  providers: [],
+  providers: [MenuService, SystemStateService, MenuNotificationService],
   exports: [MenuComponent]
 })
 export class NgxDhis2MenuModule {}

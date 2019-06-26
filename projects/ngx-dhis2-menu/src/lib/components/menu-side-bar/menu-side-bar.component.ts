@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuService } from '../../services/menu.service';
+import { NgxDhis2HttpClientService, User } from '@iapps/ngx-dhis2-http-client';
+import { Observable } from 'rxjs';
+
 import { PROFILE_MENUS } from '../../constants/profile-menus';
 import { LOG_OUT } from '../../icons';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-menu-side-bar',
@@ -13,7 +16,7 @@ export class MenuSideBarComponent implements OnInit {
   rootUrl: string;
   showProfile: boolean;
   currentUser: any;
-  loadingUser: boolean;
+  currentUser$: Observable<User>;
   profileMenus: any[];
   apps: any[];
   originalApps: any[];
@@ -22,10 +25,13 @@ export class MenuSideBarComponent implements OnInit {
   showSidebarApps: boolean;
   logOutIcon: string;
 
-  constructor(private menuService: MenuService) {
+  constructor(
+    private menuService: MenuService,
+    private httpClient: NgxDhis2HttpClientService
+  ) {
     this.showProfile = false;
     this.rootUrl = '../../../';
-    this.loadingUser = true;
+
     this.apps = [];
     this.originalApps = [];
     this.loadingModules = true;
@@ -36,16 +42,7 @@ export class MenuSideBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.menuService.getUserInfo(this.rootUrl).subscribe((profile: any) => {
-      if (profile) {
-        this.currentUser = {
-          name: profile.displayName,
-          email: profile.email
-        };
-      }
-
-      this.loadingUser = false;
-    });
+    this.currentUser$ = this.httpClient.me();
 
     this.menuService
       .getMenuModules(this.rootUrl)
