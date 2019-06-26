@@ -10,7 +10,7 @@ import { MenuProfileComponent } from './components/menu-profile/menu-profile.com
 import { MenuSearchComponent } from './components/menu-search/menu-search.component';
 import { MenuSideBarComponent } from './components/menu-side-bar/menu-side-bar.component';
 import { MenuComponent } from './containers/menu/menu.component';
-import { ClickOutsideDirective } from './directives';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { AbbreviatePipe } from './pipes/abbreviate.pipe';
 import { ConvertToLighterColor } from './pipes/convert-to-lighter-color.pipe';
 import { FilterByNamePipe } from './pipes/filter-by-name.pipe';

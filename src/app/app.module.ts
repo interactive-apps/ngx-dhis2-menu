@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NgxDhis2HttpClientModule } from '@iapps/ngx-dhis2-http-client';
-import { NgxDhis2MenuModule } from 'projects/ngx-dhis2-menu/src/public_api';
+import { NgxDhis2MenuModule } from '@iapps/ngx-dhis2-menu';
 
 @NgModule({
   declarations: [AppComponent],
