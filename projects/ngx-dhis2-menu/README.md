@@ -4,13 +4,13 @@ Menu module for dhis2 applications based on angular 6
 
 ## installation
 
-`npm install @hisptz/ngx-dhis2-menu`
+`npm install @iapps/ngx-dhis2-menu`
 
 ## Usage
 
 If the module is to be imported in the app.module, then import as
 
-`import { NgxDhis2MenuModule } from '@hisptz/ngx-dhis2-menu';`
+`import { NgxDhis2MenuModule } from '@iapps/ngx-dhis2-menu';`
 
 then add this in the imports
 

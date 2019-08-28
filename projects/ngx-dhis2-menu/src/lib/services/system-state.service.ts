@@ -1,15 +1,15 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { switchMap, tap } from "rxjs/operators";
-import { BehaviorSubject, of, Observable, timer } from "rxjs";
+import { Injectable } from '@angular/core';
+import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
+import { BehaviorSubject, Observable, of, timer } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SystemStateService {
   private _loggingStatus$: BehaviorSubject<boolean>;
   private _timeInterval: number;
   private _waitingTime: number;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: NgxDhis2HttpClientService) {
     this._loggingStatus$ = new BehaviorSubject<boolean>(true);
     this._timeInterval = 30000;
     this._waitingTime = 0;
@@ -53,6 +53,8 @@ export class SystemStateService {
   }
 
   pingServer(): Observable<any> {
-    return this.httpClient.get("../../../dhis-web-commons-stream/ping.action");
+    return this.httpClient.get('dhis-web-commons-stream/ping.action', {
+      useRootUrl: true
+    });
   }
 }

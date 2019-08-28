@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class MenuNotificationService {
-  constructor(private httpClient: HttpClient) {
-
-  }
+  constructor(private httpClient: HttpClient) {}
 
   loadNotification(rootUrl: string): Observable<any> {
-    return this.httpClient.get(`${rootUrl}api/me/dashboard.json`).pipe(catchError(() => of(null)));
+    return this.httpClient
+      .get(`${rootUrl}api/me/dashboard.json`)
+      .pipe(catchError(() => of(null)));
   }
 }
