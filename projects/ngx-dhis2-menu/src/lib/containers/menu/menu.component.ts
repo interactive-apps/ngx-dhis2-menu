@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
 import {
-  trigger,
+  animate,
   state,
   style,
   transition,
-  animate
+  trigger
 } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
 import { Observable } from 'rxjs';
-import { MenuService } from '../../services/menu.service';
-import { SystemStateService } from '../../services/system-state.service';
+
 import { MENU_BACKGROUND_COLORS } from '../../constants/menu-background-colors';
-import { SystemInfoService } from '@iapps/ngx-dhis2-http-client';
+import { SystemStateService } from '../../services/system-state.service';
 
 @Component({
   selector: 'ngx-dhis2-menu',
@@ -53,8 +53,7 @@ export class MenuComponent implements OnInit {
   contextPath: string;
 
   constructor(
-    private menuService: MenuService,
-    private systemInfoService: SystemInfoService,
+    private httpClient: NgxDhis2HttpClientService,
     private systemStatusService: SystemStateService
   ) {
     this.rootUrl = '../../../';
@@ -103,7 +102,7 @@ export class MenuComponent implements OnInit {
   }
 
   getSystemSettings() {
-    this.systemInfoService.get().subscribe(
+    this.httpClient.systemInfo().subscribe(
       (settings: any) => {
         if (settings) {
           this.applicationTitle = settings['applicationTitle'];
