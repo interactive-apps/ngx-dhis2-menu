@@ -54,7 +54,8 @@ export class MenuNotificationComponent implements OnInit {
                 this.notificationMenuLinks["message"] == undefined ||
                 this.notificationMenuLinks["message"] == ""
               ) {
-                this.notificationMenuLinks["message"] = "../dhis-web-messaging";
+                this.notificationMenuLinks["message"] =
+                  "../../../dhis-web-messaging";
               }
             } else if (menuItem.name.indexOf("messaging") !== -1) {
               this.notificationMenuLinks["message"] = menuItem.defaultAction;
