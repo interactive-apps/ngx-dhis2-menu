@@ -51,13 +51,13 @@ export class MenuService {
         newItem.displayName = newItem.name;
       }
 
-      // if (newItem.defaultAction.indexOf("http") === -1) {
-      //   newItem.defaultAction = "../../" + newItem.defaultAction;
-      // }
+      if (newItem.defaultAction.indexOf("http") === -1) {
+        newItem.defaultAction = "../../" + newItem.defaultAction;
+      }
 
-      // if (newItem.icon.indexOf("http") === -1) {
-      //   newItem.icon = "../../" + newItem.icon;
-      // }
+      if (newItem.icon.indexOf("http") === -1) {
+        newItem.icon = "../../" + newItem.icon;
+      }
 
       if (newItem.defaultAction.startsWith("../")) {
         newItem.defaultAction = "../../" + newItem.defaultAction;
