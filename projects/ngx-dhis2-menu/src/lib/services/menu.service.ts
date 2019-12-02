@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { NgxDhis2HttpClientService } from '@iapps/ngx-dhis2-http-client';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { NgxDhis2HttpClientService } from "@iapps/ngx-dhis2-http-client";
+import { BehaviorSubject, Observable } from "rxjs";
 
-import * as fromConstants from '../constants';
+import * as fromConstants from "../constants";
 
 @Injectable()
 export class MenuService {
@@ -15,13 +15,16 @@ export class MenuService {
   getMenuModules(rootUrl: string): Observable<any> {
     return Observable.create(observer => {
       this.httpClient
-        .get('dhis-web-commons/menu/getModules.action', { useRootUrl: true })
+        .get("dhis-web-commons/menu/getModules.action", { useRootUrl: true })
         .subscribe(
           (menuModuleResult: any) => {
+            //console.log("default menu", menuModuleResult.modules);
             const sanitizedMenu = this._sanitizeMenuItems(
               menuModuleResult.modules,
               rootUrl
             );
+
+            console.log("sanitized menu", sanitizedMenu);
             this._menuModules$.next(sanitizedMenu);
             observer.next(sanitizedMenu);
             observer.complete();
@@ -42,18 +45,25 @@ export class MenuService {
     const sanitizedMenuItems = menuItems.map((item: any) => {
       const newItem: any = { ...item };
       if (
-        !newItem.hasOwnProperty('displayName') ||
-        newItem.displayName === ''
+        !newItem.hasOwnProperty("displayName") ||
+        newItem.displayName === ""
       ) {
         newItem.displayName = newItem.name;
       }
 
-      if (newItem.defaultAction.indexOf('http') === -1) {
-        newItem.defaultAction = '../../' + newItem.defaultAction;
-      }
+      // if (newItem.defaultAction.indexOf("http") === -1) {
+      //   newItem.defaultAction = "../../" + newItem.defaultAction;
+      // }
 
-      if (newItem.icon.indexOf('http') === -1) {
-        newItem.icon = '../../' + newItem.icon;
+      // if (newItem.icon.indexOf("http") === -1) {
+      //   newItem.icon = "../../" + newItem.icon;
+      // }
+
+      if (newItem.defaultAction.startsWith("../")) {
+        newItem.defaultAction = "../../" + newItem.defaultAction;
+      }
+      if (newItem.icon.startsWith("../")) {
+        newItem.icon = "../../" + newItem.icon;
       }
 
       newItem.onlyShowOnSearch = false;
@@ -65,16 +75,22 @@ export class MenuService {
       (item: any) => {
         const newItem: any = { ...item };
 
-        if (newItem.defaultAction) {
+        if (newItem.defaultAction && newItem.defaultAction.startsWith("/")) {
+          newItem.defaultAction = "../../.." + newItem.defaultAction;
+        } else {
           newItem.defaultAction = rootUrl + newItem.defaultAction;
         }
 
-        if (newItem.icon) {
+        if (newItem.icon && newItem.icon.startsWith("/")) {
+          newItem.icon = "../../.." + newItem.icon;
+        } else {
           newItem.icon = rootUrl + newItem.icon;
         }
         return newItem;
       }
     );
+
+    //console.log(predefinedMenuItems);
     return [...sanitizedMenuItems, ...predefinedMenuItems];
   }
 }
