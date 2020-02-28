@@ -24,7 +24,7 @@ export class MenuService {
               rootUrl
             );
 
-            console.log("sanitized menu", sanitizedMenu);
+            //console.log("sanitized menu", sanitizedMenu);
             this._menuModules$.next(sanitizedMenu);
             observer.next(sanitizedMenu);
             observer.complete();

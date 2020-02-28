@@ -46,11 +46,10 @@ export class MenuNotificationComponent implements OnInit {
             if (menuItem.name.indexOf("interpretation") !== -1) {
               this.notificationMenuLinks["interpretation"] =
                 menuItem.defaultAction;
-              console.log(
+              /*console.log(
                 "this.notificationMenuLinks",
                 this.notificationMenuLinks["message"]
-              );
-              if (
+              )*/ if (
                 this.notificationMenuLinks["message"] == undefined ||
                 this.notificationMenuLinks["message"] == ""
               ) {
