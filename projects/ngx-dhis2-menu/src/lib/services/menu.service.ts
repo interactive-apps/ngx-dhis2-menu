@@ -24,7 +24,7 @@ export class MenuService {
               rootUrl
             );
 
-            console.log("sanitized menu", sanitizedMenu);
+            //console.log("sanitized menu", sanitizedMenu);
             this._menuModules$.next(sanitizedMenu);
             observer.next(sanitizedMenu);
             observer.complete();
@@ -42,7 +42,7 @@ export class MenuService {
   }
 
   private _sanitizeMenuItems(menuItems: any[], rootUrl: string): any {
-    console.log("menu items", menuItems);
+    //console.log("menu items", menuItems);
 
     const sanitizedMenuItems = menuItems.map((item: any) => {
       const newItem: any = { ...item };
@@ -92,7 +92,7 @@ export class MenuService {
       }
     );
 
-    console.log("predefined menu items", predefinedMenuItems);
+    //console.log("predefined menu items", predefinedMenuItems);
 
     //console.log(predefinedMenuItems);
     return [...sanitizedMenuItems, ...predefinedMenuItems];
