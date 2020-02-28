@@ -1,14 +1,14 @@
 {
   "/api": {
-    "target": "https://play.dhis2.org/2.29",
+    "target": "https://dhis.hisptz.org/dev",
     "secure": "false",
-    "auth": "admin:district",
+    "auth": "jessemdachi:Dhis@2020",
     "changeOrigin": "true"
   },
   "/": {
-    "target": "https://play.dhis2.org/2.29",
+    "target": "https://dhis.hisptz.org/dev",
     "secure": "false",
-    "auth": "admin:district",
+    "auth": "jessemdachi:Dhis@2020",
     "changeOrigin": "true"
   }
 }
